@@ -10,6 +10,9 @@ Node.js backend for classroom signaling with roles: **admin**, **teacher**, and 
   - Class chat messages.
 - PeerJS endpoint at `/peerjs` for WebRTC peer broker support.
 - MySQL schema for users/classes/enrollments/sessions/chat.
+- **Class secret join code** flow:
+  - Teacher creates class and gets join code.
+  - Student joins class by code.
 - Runtime feature controls (`video`, `chat`, `whiteboard`).
 
 ## Quick Start
@@ -34,8 +37,17 @@ Node.js backend for classroom signaling with roles: **admin**, **teacher**, and 
 - `POST /api/auth/login`
 - `GET /api/auth/me`
 - `GET/PUT /api/admin/features` (admin)
+- `POST /api/teacher/classes` (teacher create class with join code)
 - `POST /api/teacher/classes/:classId/sessions/start` (teacher)
+- `POST /api/student/classes/join-by-code` (student uses class code)
 - `GET /api/student/classes` (student)
+
+### Join-by-code payload
+```json
+{
+  "code": "ABCD2345"
+}
+```
 
 ## Realtime Events
 - `class:join`
